@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7cf7556ba695674a84de07cf09d1449, type: 3}
+  m_Name: Form02
+  m_EditorClassIdentifier: 
+  Name: Fiche 02
+  Color: {r: 1, g: 0.7529412, b: 0.79607844, a: 0}
+  Instructions:
+  - "La tortue rouge est au milieu de la 3\xE8me ligne."
+  - "L'abeille bleue est au milieu de la 3\xE8me colonne."
+  - "L'abeille rouge est au milieu de la 1\xE8re ligne."
+  - "L'abeille jaune est au milieu de la 1\xE8re colonne."
+  - Le chat jaune est au centre de la grille.
+  - "La tortue bleue est \xE0 gauche dans la 1\xE8re ligne."
+  - "Le chat rouge est en haut de la 3\xE8me colonne."
+  - "La tortue jaune est \xE0 gauche dans la 3\xE8me ligne."
+  - "Le chat bleu est \xE0 droite dans la 3\xE8me ligne."
+  Solution: {fileID: 11400000, guid: 47d26ed17e7b896489662e01448857b3, type: 2}

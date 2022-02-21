@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7cf7556ba695674a84de07cf09d1449, type: 3}
+  m_Name: Form35
+  m_EditorClassIdentifier: 
+  Name: Fiche 35
+  Color: {r: 1, g: 0.7529412, b: 0.79607844, a: 0}
+  Instructions:
+  - "On ne vole pas dans la 1\xE8re et la 2\xE8me colonne."
+  - "Il n'y a pas d'animal jaune dans la 2\xE8me et la 3\xE8me ligne."
+  - "Il n'y a pas d'animal rouge dans la 1\xE8re et la 2\xE8me ligne."
+  - "On ne ronronne pas dans la 2\xE8me colonne."
+  Solution: {fileID: 11400000, guid: 2fe0a0d649eba664a99dcebb11906b4d, type: 2}
