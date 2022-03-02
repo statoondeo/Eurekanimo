@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Droppable
   - 
   - 
   - 
@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgrounds
+    uniqueID: 2131058349
+    locked: 0
+  - name: Droppables
+    uniqueID: 1475554187
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Draggables
+    uniqueID: 2110443245
+    locked: 0
+  - name: Dragged
+    uniqueID: 3072535251
     locked: 0

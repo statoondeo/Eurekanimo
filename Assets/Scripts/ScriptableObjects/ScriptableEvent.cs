@@ -1,17 +1,27 @@
-ï»¿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Eurekanimo/New Event", fileName = "New Event")]
+/// <summary>
+/// Classe permettant de créer un évènement à observer et de lui donner
+/// de la substance en le matérialisant sous forme d'asset.
+/// </summary>
+[CreateAssetMenu(menuName = "New Event", fileName = "New Event")]
 public class ScriptableEvent : ScriptableObject
 {
-    protected readonly HashSet<EventListener> listeners = new HashSet<EventListener>();
+    // Liste des observers de l'évènement
+    // (Hashset pour éviter les doublons)
+    protected readonly HashSet<ScriptableEventListener> listeners = new HashSet<ScriptableEventListener>();
 
-    public void Raise()
+    // Emission de l'évènement
+    public void Raise(ScriptableEventArg scriptableEventArg)
     {
-        foreach (EventListener listener in listeners) listener.OnEventRaised();
+        // On notifie tous les observes
+        foreach (ScriptableEventListener listener in listeners) listener.OnEventRaised(scriptableEventArg);
     }
 
-    public void RegisterListener(EventListener listener) => listeners.Add(listener);
+    // On ajoute un listener
+    public void RegisterListener(ScriptableEventListener listener) => listeners.Add(listener);
 
-    public void UnregisterListener(EventListener listener) => listeners.Remove(listener);
+    // On supprime un listener
+    public void UnregisterListener(ScriptableEventListener listener) => listeners.Remove(listener);
 }
