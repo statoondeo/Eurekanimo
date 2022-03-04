@@ -4,7 +4,6 @@
 public class ScriptableForm : ScriptableObject
 {
 	public string Name;
-	public Color Color;
 	public string[] Instructions;
 	public ScriptableToken[] Solution;
 }

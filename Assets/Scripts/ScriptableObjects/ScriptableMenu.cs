@@ -5,6 +5,8 @@ public class ScriptableMenu : ScriptableObject
 {
 	public ScriptableFormsCatalog ScriptableFormsCatalog;
 
-	public ScriptableEvent OnGameplaySceneRequested;
-	public AudioClip Music;
+	public ScriptableEvent OnSceneRequested;
+	public ScriptableEvent OnFormSelected;
+	public ScriptableEvent OnFormNotSelected;
+	public SoundManager.Clips Music;
 }

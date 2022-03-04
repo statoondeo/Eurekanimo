@@ -16,8 +16,6 @@ public class GridController : MonoBehaviour
 
 	[SerializeField] protected Color RightTokenColor;
 	[SerializeField] protected Color WrongTokenColor;
-	[SerializeField] protected AudioClip RightTokenSound;
-	[SerializeField] protected AudioClip WrongTokenSound;
 	[SerializeField] protected GameObject TokensContainer;
 	[SerializeField] protected GameObject DropZonesContainer;
 	[SerializeField] protected GameObject InstructionsContainer;
@@ -63,13 +61,13 @@ public class GridController : MonoBehaviour
 		{
 			if (Tokens[i].ScriptableToken == ScriptableFormsCatalog.SelectedForm.Solution[i])
 			{
-				SoundManager.Instance.PlayOneShot(RightTokenSound);
+				SoundManager.Instance.Play(SoundManager.Clips.CorrectSound);
 				DropZones[i].ColorTo(RightTokenColor);
 				Tokens[i].Explode();
 			}
 			else
 			{
-				SoundManager.Instance.PlayOneShot(WrongTokenSound);
+				SoundManager.Instance.Play(SoundManager.Clips.WrongSound);
 				DropZones[i].ColorTo(WrongTokenColor);
 			}
 			yield return (new WaitForSeconds(TransitionsDuration));
@@ -78,6 +76,7 @@ public class GridController : MonoBehaviour
 
 	public void CheckGrid()
 	{
+		SoundManager.Instance.Play(SoundManager.Clips.ClickSound);
 		for (int i = 0, nbItems = Tokens.Length; i < nbItems; i++)
 		{
 			if (Tokens[i].ScriptableToken != ScriptableFormsCatalog.SelectedForm.Solution[i])
@@ -105,7 +104,7 @@ public class GridController : MonoBehaviour
 		if (-1 != tokenIndex)
 		{
 			Tokens[tokenIndex] = null;
-			OnDropZoneEmptied.Raise(new OnDropZoneEmptiedScriptableEventArg(DropZones[tokenIndex]));
+			OnDropZoneEmptied.Raise(new OnDropZoneEmptiedScriptableEventArg() { DropZone = DropZones[tokenIndex] });
 			OnGridNotFilled.Raise(ScriptableEventArg.Empty);
 		}
 	}
@@ -128,7 +127,7 @@ public class GridController : MonoBehaviour
 			}
 			Tokens[containerIndex] = onTokenDroppedEventArg.Token;
 			onTokenDroppedEventArg.Token.MoveTo(onTokenDroppedEventArg.DropZone.transform.position);
-			OnDropZoneFilled.Raise(new OnDropZoneFilledScriptableEventArg(DropZones[containerIndex]));
+			OnDropZoneFilled.Raise(new OnDropZoneFilledScriptableEventArg() { DropZone = DropZones[containerIndex] });
 
 			(System.Array.IndexOf(Tokens, null) == -1 ? OnGridFilled : OnGridNotFilled).Raise(ScriptableEventArg.Empty);
 		}

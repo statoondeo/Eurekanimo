@@ -12,8 +12,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		base.Awake();
 		// Création des observers
-		OnMenuSceneRequestedListener = CreateScriptableEventListener("Data/Events/OnMenuSceneRequested", Instance.OnMenuSceneRequestedCallback);
-		OnGameplaySceneRequestedListener = CreateScriptableEventListener("Data/Events/OnGameplaySceneRequested", Instance.OnGameplaySceneRequestedCallback);
+		OnSceneRequestedListener = CreateScriptableEventListener("Data/Events/OnSceneRequested", Instance.OnSceneRequestedCallback);
 	}
 
 	/// <summary>
@@ -45,23 +44,16 @@ public class GameManager : Singleton<GameManager>
 
 	#region Callback des évènements écoutés
 
-	protected void OnMenuSceneRequestedCallback(ScriptableEventArg eventArg)
+	protected void OnSceneRequestedCallback(ScriptableEventArg eventArg)
 	{
-		LoadScene(SceneNames.Menu);
-	}
-
-	protected void OnGameplaySceneRequestedCallback(ScriptableEventArg eventArg)
-	{
-		LoadScene(SceneNames.Gameplay);
+		LoadScene((eventArg as OnSceneRequestedEventArg).Scene);
 	}
 
 	#endregion
 
 	// Evènements écoutés
 	// Transitions de scènes  demandées
-	protected ScriptableEventListener OnMenuSceneRequestedListener;
-	protected ScriptableEventListener OnGameplaySceneRequestedListener;
-	protected AudioSource MusicSource;
+	protected ScriptableEventListener OnSceneRequestedListener;
 
 	// Changements de scène
 	public static void LoadScene(SceneNames sceneName)

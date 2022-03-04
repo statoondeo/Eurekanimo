@@ -9,6 +9,11 @@ public static class Tweening
 {
 	#region Fonctions de tweening
 
+	public static float SinInOut(float progress)
+	{
+		return (-(Mathf.Cos(Mathf.PI * progress) - 1) / 2);
+	}
+
 	/// <summary>
 	/// Départ progressif
 	/// </summary>
@@ -27,6 +32,15 @@ public static class Tweening
 	public static float QuintOut(float progress)
 	{
 		return (1 - Mathf.Pow(1 - progress, 5));
+	}
+	/// <summary>
+	/// Amortissement début et fin du mouvement
+	/// </summary>
+	/// <param name="progress"></param>
+	/// <returns></returns>
+	public static float QuintInOut(float progress)
+	{
+		return (progress < 0.5f ? 16.0f * Mathf.Pow(progress, 5) : 1 - Mathf.Pow(-2 * progress + 2, 5) / 2);
 	}
 
 	/// <summary>

@@ -20,30 +20,80 @@ public class MenuManager : MonoBehaviour
 
 	private void Start()
 	{
-		ScriptableMenu.ScriptableFormsCatalog.SelectedForm = null;
-		SoundManager.Instance.PlayMainMusic(ScriptableMenu.Music);
-
-		for (int i = 0, nbItems = ScriptableMenu.ScriptableFormsCatalog.Forms.Length; i < nbItems; i++)
+		if (!SoundManager.Instance.IsPlaying(ScriptableMenu.Music))
 		{
-			MenuView.Dropdown.options.Add(new TMP_Dropdown.OptionData() { text = ScriptableMenu.ScriptableFormsCatalog.Forms[i].Name });
+			SoundManager.Instance.Play(ScriptableMenu.Music);
 		}
-		MenuView.Dropdown.RefreshShownValue();
-		MenuView.Dropdown.value = 0;
-		ScriptableMenu.ScriptableFormsCatalog.SelectedForm = ScriptableMenu.ScriptableFormsCatalog.Forms[0];
+
+		FillCategories();
+	}
+
+	protected void FillCategories()
+	{
+		ScriptableMenu.ScriptableFormsCatalog.SelectedCategory = null;
+		MenuView.CategoriesDropdown.ClearOptions();
+		int nbItems = ScriptableMenu.ScriptableFormsCatalog.Categories.Length;
+		if (nbItems > 0)
+		{
+			for (int i = 0; i < nbItems; i++)
+			{
+				MenuView.CategoriesDropdown.options.Add(new TMP_Dropdown.OptionData() { text = ScriptableMenu.ScriptableFormsCatalog.Categories[i].Name, image = ScriptableMenu.ScriptableFormsCatalog.Categories[i].Sprite });
+			}
+			MenuView.CategoriesDropdown.RefreshShownValue();
+			OnChangeCategory(0);
+		}
+		else
+		{
+			MenuView.CategoriesDropdown.interactable = false;
+			ScriptableMenu.OnFormNotSelected.Raise(ScriptableEventArg.Empty);
+		}
+	}
+
+	protected void FillForms()
+	{
+		ScriptableMenu.ScriptableFormsCatalog.SelectedForm = null;
+		MenuView.FormsDropdown.ClearOptions();
+		int nbItems = ScriptableMenu.ScriptableFormsCatalog.SelectedCategory.Forms.Length;
+		if (nbItems > 0)
+		{
+			for (int i = 0; i < nbItems; i++)
+			{
+				MenuView.FormsDropdown.options.Add(new TMP_Dropdown.OptionData() { text = ScriptableMenu.ScriptableFormsCatalog.SelectedCategory.Forms[i].Name });
+			}
+			MenuView.FormsDropdown.RefreshShownValue();
+			MenuView.FormsDropdown.interactable = true;
+			OnChangeForm(0);
+		}
+		else
+		{
+			MenuView.FormsDropdown.interactable = false;
+			ScriptableMenu.OnFormNotSelected.Raise(ScriptableEventArg.Empty);
+		}
+	}
+
+	public void OnChangeCategory(int category)
+	{
+		if (ScriptableMenu.ScriptableFormsCatalog.Categories[category] != ScriptableMenu.ScriptableFormsCatalog.SelectedCategory)
+		{
+			ScriptableMenu.ScriptableFormsCatalog.SelectedCategory = ScriptableMenu.ScriptableFormsCatalog.Categories[category];
+			MenuView.CategoriesDropdown.value = category;
+			FillForms();
+		}
 	}
 
 	public void OnChangeForm(int form)
 	{
-		// On applique le background demandé
-		if (ScriptableMenu.ScriptableFormsCatalog.Forms[form] != ScriptableMenu.ScriptableFormsCatalog.SelectedForm)
+		if (ScriptableMenu.ScriptableFormsCatalog.SelectedCategory.Forms[form] != ScriptableMenu.ScriptableFormsCatalog.SelectedForm)
 		{
-			ScriptableMenu.ScriptableFormsCatalog.SelectedForm = ScriptableMenu.ScriptableFormsCatalog.Forms[form];
-			MenuView.Dropdown.value = form;
+			ScriptableMenu.ScriptableFormsCatalog.SelectedForm = ScriptableMenu.ScriptableFormsCatalog.SelectedCategory.Forms[form];
+			MenuView.FormsDropdown.value = form;
+			ScriptableMenu.OnFormSelected.Raise(ScriptableEventArg.Empty);
 		}
 	}
 
 	public void OnGameplayClick()
 	{
-		ScriptableMenu.OnGameplaySceneRequested.Raise(ScriptableEventArg.Empty);
+		SoundManager.Instance.Play(SoundManager.Clips.ClickSound);
+		ScriptableMenu.OnSceneRequested.Raise(new OnSceneTransitionRequestedEventArg() { Scene = SceneNames.Gameplay });
 	}
 }

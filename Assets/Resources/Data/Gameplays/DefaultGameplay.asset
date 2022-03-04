@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9463dab49b28346489e2082dcfc44c1c, type: 3}
   m_Name: DefaultGameplay
   m_EditorClassIdentifier: 
-  OnMenuSceneRequested: {fileID: 11400000, guid: 14521d262bc40274fa5c1db23a94b055, type: 2}
-  OnVictorySceneRequested: {fileID: 11400000, guid: b7d690df64bb23641a0ff2b4c2806389, type: 2}
-  OnDefeatSceneRequested: {fileID: 11400000, guid: 9185af2bb21669e4a939d456d13b18de, type: 2}
+  OnSceneRequested: {fileID: 11400000, guid: bb3eccd46d6d39a4ba9493dd5e8cb6be, type: 2}

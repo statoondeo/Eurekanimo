@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScriptableFormsCatalog : ScriptableObject
 {
 	[HideInInspector, NonSerialized] public ScriptableForm SelectedForm;
-	public ScriptableForm[] Forms;
+	[HideInInspector, NonSerialized] public ScriptableCategory SelectedCategory;
+	public ScriptableCategory[] Categories;
 }
 

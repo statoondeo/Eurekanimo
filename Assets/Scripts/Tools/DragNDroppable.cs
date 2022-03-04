@@ -21,8 +21,6 @@ public class DragNDroppable : MonoBehaviour
 	[Tooltip("Lorsqu'un token est 'draggé'"), SerializeField] protected ScriptableEvent OnTokenDragged;
 	[Tooltip("Lorsqu'un token est 'droppé'"), SerializeField] protected ScriptableEvent OnTokenDropped;
 	[Tooltip("Pour détection des dropzones"), SerializeField] protected LayerMask DroppableLayerMask;
-	[Tooltip("Son lors du drag"), SerializeField] protected AudioClip DragClip;
-	[Tooltip("Son lors du drop"), SerializeField] protected AudioClip DropClip;
 	[Tooltip("Sorting Layer pendant le dnd"), SerializeField] protected string SortingLayer;
 
 	[Header("Comportement visuel pendant le dnd")]
@@ -52,8 +50,6 @@ public class DragNDroppable : MonoBehaviour
 	{
 		Debug.Assert(null != OnTokenDragged, gameObject.name + "/OnTokenDragged not set!");
 		Debug.Assert(null != OnTokenDropped, gameObject.name + "/OnTokenDropped not set!");
-		Debug.Assert(null != DragClip, gameObject.name + "/DragClip not set!");
-		Debug.Assert(null != DropClip, gameObject.name + "/DropClip not set!");
 		Debug.Assert(null != BackgroundRenderer, gameObject.name + "/BackgroundRenderer not set!");
 		Debug.Assert(null != HaloRenderer, gameObject.name + "/HaloRenderer not set!");
 		Debug.Assert(null != FaceRenderer, gameObject.name + "/FaceRenderer not set!");
@@ -84,18 +80,17 @@ public class DragNDroppable : MonoBehaviour
 		PositionBeforeDragBegin = transform.position;
 		Offset = PositionBeforeDragBegin - Camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
 
-
 		HaloRenderer.sortingLayerName = SortingLayer;
 		FaceRenderer.sortingLayerName = SortingLayer;
 		BackgroundRenderer.sortingLayerName = SortingLayer;
 
-		SoundManager.Instance.PlayOneShot(DragClip);
+		SoundManager.Instance.Play(SoundManager.Clips.DragSound);
 		StartNStopParticles.Play();
 		StartCoroutine(FaceRenderer.transform.ZoomToRoutine(ZoomOutTarget, TransitionsDuration, Tweening.QuintOut));
 		StartCoroutine(HaloRenderer.AlphaToRoutine(1.0f, TransitionsDuration, Tweening.QuintOut));
 		MoveParticles.Play();
 
-		OnTokenDragged.Raise(new OnTokenDraggedScriptableEventArg(this));
+		OnTokenDragged.Raise(new OnTokenDraggedScriptableEventArg() { Token = this });
 	}
 
 	private void OnMouseUp()
@@ -106,13 +101,13 @@ public class DragNDroppable : MonoBehaviour
 		FaceRenderer.sortingLayerID = InitialFaceSortingLayer;
 		BackgroundRenderer.sortingLayerID = InitialBackgroundSortingLayer;
 
-		SoundManager.Instance.PlayOneShot(DropClip);
+		SoundManager.Instance.Play(SoundManager.Clips.DropSound);
 		StartNStopParticles.Play();
 		StartCoroutine(FaceRenderer.transform.ZoomToRoutine(ZoomInTarget, TransitionsDuration, Tweening.QuintOut));
 		StartCoroutine(HaloRenderer.AlphaToRoutine(0.0f, TransitionsDuration, Tweening.QuintOut));
 		MoveParticles.Stop();
 
-		OnTokenDropped.Raise(new OnTokenDroppedScriptableEventArg(this, GetTargetDropZone()));
+		OnTokenDropped.Raise(new OnTokenDroppedScriptableEventArg() { Token = this, DropZone = GetTargetDropZone() });
 	}
 
 	private void Update()

@@ -23,17 +23,18 @@ public class GameplayUIController : MonoBehaviour
 	public void OnGridCorrectlyFilled()
 	{
 		StartCoroutine(RightPanel.MoveToRoutine(Vector2.zero, TransitionsDuration, Tweening.QuintOut));
-		SoundManager.Instance.PlayOneShot(RightPanelClip);
+		SoundManager.Instance.Play(SoundManager.Clips.VictoryTheme);
 		RightPanelParticles.Play();
 	}
 	public void OnGridWronglyFilled()
 	{
 		StartCoroutine(WrongPanel.MoveToRoutine(Vector2.zero, TransitionsDuration, Tweening.QuintOut));
-		SoundManager.Instance.PlayOneShot(WrongPanelClip);
+		SoundManager.Instance.Play(SoundManager.Clips.DefeatTheme);
 	}
 
 	public void OnMaskWrongPanel()
 	{
+		SoundManager.Instance.Play(SoundManager.Clips.ClickSound);
 		StartCoroutine(WrongPanel.MoveToRoutine(WrongPanelInitialPosition, TransitionsDuration, Tweening.QuintIn));
 	}
 }

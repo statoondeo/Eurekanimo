@@ -19,6 +19,7 @@ public class GameplayManager : MonoBehaviour
 
 	public void OnMenuClick()
 	{
-		ScriptableGameplay.OnMenuSceneRequested.Raise(ScriptableEventArg.Empty);
+		SoundManager.Instance.Play(SoundManager.Clips.ClickSound);
+		ScriptableGameplay.OnSceneRequested.Raise(new OnSceneTransitionRequestedEventArg() { Scene = SceneNames.Menu });
 	}
 }
