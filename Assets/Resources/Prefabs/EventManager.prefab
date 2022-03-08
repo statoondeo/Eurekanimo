@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3258290986789465182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3258290986789465180}
+  - component: {fileID: 3258290986789465183}
+  m_Layer: 0
+  m_Name: EventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3258290986789465180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258290986789465182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3258290986789465183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258290986789465182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0831055bcb0885b4ab01c001f7277b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSceneRequested: {fileID: 11400000, guid: 33d5e1aec76b3dd46b3346f194b5902b, type: 2}
+  OnSceneTransitionRequested: {fileID: 11400000, guid: 8b7f09798090ec5418043bc94bc960f7, type: 2}
+  OnFormSelected: {fileID: 11400000, guid: f4f9273dcd20e004f851529b0940f6c3, type: 2}
+  OnFormNotSelected: {fileID: 11400000, guid: 9d4a0056e43284248bc26c89832f1e75, type: 2}
+  OnGridFilled: {fileID: 11400000, guid: 3c60a734e7f6d764e960facfcaedaa9a, type: 2}
+  OnGridNotFilled: {fileID: 11400000, guid: 6d9a89eb44e10fa47840d96c3bc2be18, type: 2}
+  OnGridCorrectlyFilled: {fileID: 11400000, guid: d460d50f2fdede240a5f15e2a0accc08, type: 2}
+  OnGridWronglyFilled: {fileID: 11400000, guid: 1e6c573cd13a93b4c94d56d89332de5a, type: 2}
+  OnContainerEmptied: {fileID: 11400000, guid: 7de9ac17567ed0d409a0d35c5dedddbd, type: 2}
+  OnContainerFilled: {fileID: 11400000, guid: 74e2a6d2e38d46445b198d85f864e31d, type: 2}
+  OnContainerHovered: {fileID: 11400000, guid: 8f43659142185f94d9ab2afd17be2796, type: 2}
+  OnTokenDragged: {fileID: 11400000, guid: 8a08e65f517fef449af65599c5f8a0c1, type: 2}
+  OnTokenDropped: {fileID: 11400000, guid: 92c2a21e955074c449c1dbfc716b6618, type: 2}
+  OnGameReady: {fileID: 11400000, guid: 65f41788e14b9564cbbc25e0553aad48, type: 2}
+  OnGameNotReady: {fileID: 11400000, guid: 74cfd108ac0dac4409a4f3aca2513f62, type: 2}

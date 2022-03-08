@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Classe utilitaire avec les méthodes de Tweening
@@ -161,6 +162,26 @@ public static class Tweening
 			ttl += Time.deltaTime;
 		}
 		sprite.color = targetColor;
+	}
+	/// <summary>
+	/// Couleur
+	/// </summary>
+	/// <param name="transform">sprite</param>
+	/// <param name="targetZoom">Alpha à atteindre</param>
+	/// <param name="duration">Durée</param>
+	/// <param name="tweening">Méthode</param>
+	/// <returns></returns>
+	public static IEnumerator ColorToRoutine(this Image image, Color targetColor, float duration, Func<float, float> tweening)
+	{
+		float ttl = 0.0f;
+		Color originColor = image.color;
+		while (ttl < duration)
+		{
+			image.color = Color.Lerp(originColor, targetColor, tweening(ttl / duration));
+			yield return (null);
+			ttl += Time.deltaTime;
+		}
+		image.color = targetColor;
 	}
 
 	#endregion

@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 2709484472875845542}
   - component: {fileID: 2709484472875845563}
   - component: {fileID: 2709484472875845560}
-  - component: {fileID: 2709484472875845561}
   m_Layer: 0
   m_Name: BlackImage
   m_TagString: Untagged
@@ -163,8 +162,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -1}
-  m_SizeDelta: {x: 3840, y: 2160}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2709484472875845563
 CanvasRenderer:
@@ -204,25 +203,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &2709484472875845561
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2709484472875845543}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 788e6b7e7f618114f9db52c06e9b7634, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2709484473162177980
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +290,6 @@ GameObject:
   - component: {fileID: 2709484473221163934}
   - component: {fileID: 2709484473221163920}
   - component: {fileID: 2709484473221163921}
-  - component: {fileID: 2709484473221163923}
   m_Layer: 0
   m_Name: BlackImage
   m_TagString: Untagged
@@ -334,8 +313,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1}
-  m_SizeDelta: {x: 3840, y: 2160}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2709484473221163920
 CanvasRenderer:
@@ -375,25 +354,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &2709484473221163923
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2709484473221163935}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 788e6b7e7f618114f9db52c06e9b7634, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2709484473768126230
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +367,6 @@ GameObject:
   - component: {fileID: 2709484473768126248}
   - component: {fileID: 2709484473768126249}
   - component: {fileID: 2709484473768126253}
-  - component: {fileID: 4751351176447840110}
   m_Layer: 5
   m_Name: TransitionsCanvas
   m_TagString: Untagged
@@ -508,36 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fe35d4f7bab464e8879a800aa83210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnSceneRequested: {fileID: 11400000, guid: 98bf2951576407949aa6332d641027e8, type: 2}
   Animator: {fileID: 2709484472584564893}
   TransitionTime: 1
   IntroTransition: 1
   OuttroTransition: 1
---- !u!114 &4751351176447840110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2709484473768126230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e8fffa0432890428b035c773c51281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: bb3eccd46d6d39a4ba9493dd5e8cb6be, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2709484473768126253}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
-        m_MethodName: OnSceneTransitionRequestedCallback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

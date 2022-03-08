@@ -256,7 +256,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5335588141063707154}
   - component: {fileID: 5335588141063707148}
-  - component: {fileID: 5335588141063707149}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -296,20 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundData: {fileID: 11400000, guid: 9d62eb739e4a5f34093febda7361b089, type: 2}
-  BackgroundView: {fileID: 5335588141063707149}
-  CurrentBackground: 0
---- !u!114 &5335588141063707149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5335588141063707155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58ed237e57e06c42bcee782f0fdb01b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   Dropdown: {fileID: 0}
   Layers:
   - {fileID: 5335588140524023231}
@@ -317,6 +302,7 @@ MonoBehaviour:
   - {fileID: 5335588140478566352}
   - {fileID: 5335588141837500052}
   - {fileID: 5335588140838116571}
+  CurrentBackground: 0
 --- !u!1 &5335588141396782823
 GameObject:
   m_ObjectHideFlags: 0

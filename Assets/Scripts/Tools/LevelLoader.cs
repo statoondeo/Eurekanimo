@@ -1,18 +1,20 @@
 using System.Collections;
 using UnityEngine;
+using static EventManager;
 
 public class LevelLoader : MonoBehaviour
 {
-	[SerializeField] ScriptableEvent OnSceneRequested;
-	[SerializeField] Animator Animator;
-	[SerializeField] float TransitionTime;
-	[SerializeField] bool IntroTransition;
-	[SerializeField] bool OuttroTransition;
+	[SerializeField] protected Animator Animator;
+	[SerializeField] protected float TransitionTime;
+	[SerializeField] protected bool IntroTransition;
+	[SerializeField] protected bool OuttroTransition;
 
 	protected void Awake()
 	{
 		Debug.Assert(Animator != null, gameObject.name + "/Animator not set");
 		Debug.Assert(TransitionTime != 0, gameObject.name + "/TransitionTime not set");
+
+		EventManager.Instance.CreateEventListener(gameObject, Events.OnSceneTransitionRequested, OnSceneTransitionRequestedCallback);
 	}
 
 	protected void Start()
@@ -24,7 +26,7 @@ public class LevelLoader : MonoBehaviour
 		}
 	}
 
-	public void OnSceneTransitionRequestedCallback(ScriptableEventArg eventArg)
+	protected void OnSceneTransitionRequestedCallback(ModelEventArg eventArg)
 	{
 		StartCoroutine(TransitionToNextLevel((eventArg as OnSceneTransitionRequestedEventArg).Scene));
 	}
@@ -42,6 +44,6 @@ public class LevelLoader : MonoBehaviour
 			Animator.SetTrigger("Outtro");
 			yield return new WaitForSeconds(TransitionTime);
 		}
-		OnSceneRequested.Raise(new OnSceneRequestedEventArg() { Scene = scene });
+		EventManager.Instance.Raise(Events.OnSceneRequested, new OnSceneRequestedEventArg() { Scene = scene });
 	}
 }
