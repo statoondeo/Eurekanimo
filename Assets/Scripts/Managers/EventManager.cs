@@ -14,6 +14,8 @@ public class EventManager : Singleton<EventManager>
 
 	public enum Events
 	{
+		OnExitRequested,
+
 		// Changement de scènes
 		OnSceneRequested,
 		OnSceneTransitionRequested,
@@ -42,6 +44,7 @@ public class EventManager : Singleton<EventManager>
 		OnGameNotReady
 	}
 
+	[SerializeField] protected EventModel OnExitRequested;
 	[SerializeField] protected EventModel OnSceneRequested;
 	[SerializeField] protected EventModel OnSceneTransitionRequested;
 	[SerializeField] protected EventModel OnFormSelected;
@@ -69,6 +72,7 @@ public class EventManager : Singleton<EventManager>
 
 	protected void Load()
 	{
+		EventsAtlas.Add(Events.OnExitRequested, OnExitRequested);
 		EventsAtlas.Add(Events.OnSceneRequested, OnSceneRequested);
 		EventsAtlas.Add(Events.OnSceneTransitionRequested, OnSceneTransitionRequested);
 		EventsAtlas.Add(Events.OnFormSelected, OnFormSelected);
@@ -101,12 +105,6 @@ public class EventManager : Singleton<EventManager>
 		GetEvent(eventName).Raise(eventArg);
 	}
 
-	/// <summary>
-	/// Fonction utilitaire permettant de créer un observateur d'évènement
-	/// </summary>
-	/// <param name="eventAssetPath">ScriptableEvent asset à charger</param>
-	/// <param name="callback">Fonction callback</param>
-	/// <returns>Listener</returns>
 	public EventListener CreateEventListener(GameObject gameObject, Events eventToListen, UnityAction<ModelEventArg> callback)
 	{
 		// Création du listener

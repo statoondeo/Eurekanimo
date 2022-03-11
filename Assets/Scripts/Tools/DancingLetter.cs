@@ -29,13 +29,13 @@ public class DancingLetter : MonoBehaviour
 
 	protected IEnumerator DanceUp()
 	{
-		yield return (StartCoroutine(Tweening.MoveToRoutine(RectTransform.transform, InitialPosition * Offset, MoveDuration, Tweening.SinInOut)));
+		yield return (RectTransform.transform.MoveTo(InitialPosition * Offset, MoveDuration, Tweening.SinInOut));
 		yield return (DanceDown());
 	}
 
 	protected IEnumerator DanceDown()
 	{
-		yield return (StartCoroutine(Tweening.MoveToRoutine(RectTransform.transform, InitialPosition / Offset, MoveDuration, Tweening.SinInOut)));
+		yield return (RectTransform.transform.MoveTo(InitialPosition / Offset, MoveDuration, Tweening.SinInOut));
 		yield return (DanceUp());
 	}
 }

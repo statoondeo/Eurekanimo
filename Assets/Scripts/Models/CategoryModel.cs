@@ -26,5 +26,10 @@ public class CategoryModel : ScriptableObject
 	{
 		return (Forms[position]);
 	}
+
+	public int GetFormPosition(FormModel form)
+	{
+		return (System.Array.IndexOf(Forms, form));
+	}
 }
 

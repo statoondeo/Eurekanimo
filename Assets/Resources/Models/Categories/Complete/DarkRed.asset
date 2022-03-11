@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22218d09e2172a641b48763d6de3a5eb, type: 3}
+  m_Name: DarkRed
+  m_EditorClassIdentifier: 
+  Name: "Rouge fonc\xE9 (Fiche 40 \xE0 44)"
+  Sprite: {fileID: 21300000, guid: 43f77a91bdccbd74ab4921edfa578f37, type: 3}
+  Forms:
+  - {fileID: 11400000, guid: eda762650f9d896448674e24cf4499af, type: 2}
+  - {fileID: 11400000, guid: f2813a4ee6177cb479b8cb5c8ad371e8, type: 2}
+  - {fileID: 11400000, guid: 663e535a0634485428969b2fd7c2ac2f, type: 2}
+  - {fileID: 11400000, guid: 3a5831cf2e116c14ea8a64d3299ec5f8, type: 2}
+  - {fileID: 11400000, guid: 7e8ed3dc55352bf4aaa1cf642d66201e, type: 2}

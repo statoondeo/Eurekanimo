@@ -45,6 +45,8 @@ public class TokenPresenter : MonoBehaviour
 	protected int InitialFaceSortingLayer;
 	protected int InitialBackgroundSortingLayer;
 	protected ContainerPresenter LastHoveredContainer;
+	protected Color HaloRendererInitialColor;
+	protected Color HaloRendererTargetColor;
 
 	#region Messages Unity
 
@@ -70,13 +72,14 @@ public class TokenPresenter : MonoBehaviour
 		transform.position = new Vector3(transform.position.x, transform.position.y + 16.0f, transform.position.z);
 		ZoomInTarget = FaceRenderer.transform.localScale;
 		ZoomOutTarget = new Vector3(ZoomInTarget.x * ZoomFactor, ZoomInTarget.y * ZoomFactor, ZoomInTarget.z);
-		HaloRenderer.color = new Color(HaloRenderer.color.r, HaloRenderer.color.g, HaloRenderer.color.b, 0.0f);
+		HaloRendererInitialColor = HaloRenderer.color;
+		HaloRendererTargetColor = new Color(HaloRenderer.color.r, HaloRenderer.color.g, HaloRenderer.color.b, 1.0f);
 		InitialHaloSortingLayer = HaloRenderer.sortingLayerID;
 		InitialFaceSortingLayer = FaceRenderer.sortingLayerID;
 		InitialBackgroundSortingLayer = BackgroundRenderer.sortingLayerID;
 		IsDraggable = true;
 		yield return (new WaitForSeconds(Random.Range(0.0f, AppearDuration)));
-		yield return (StartCoroutine(transform.MoveToRoutine(InitialPosition, TransitionsDuration, Tweening.QuintOut)));
+		yield return (transform.MoveTo(InitialPosition, TransitionsDuration, Tweening.QuintOut));
 	}
 
 	protected void OnMouseDown()
@@ -94,8 +97,8 @@ public class TokenPresenter : MonoBehaviour
 		BackgroundRenderer.sortingLayerName = SortingLayer;
 
 		StartNStopParticles.Play();
-		StartCoroutine(FaceRenderer.transform.ZoomToRoutine(ZoomOutTarget, TransitionsDuration, Tweening.QuintOut));
-		StartCoroutine(HaloRenderer.AlphaToRoutine(1.0f, TransitionsDuration, Tweening.QuintOut));
+		FaceRenderer.transform.ZoomTo(ZoomOutTarget, TransitionsDuration, Tweening.QuintOut);
+		HaloRenderer.ColorTo(HaloRendererTargetColor, TransitionsDuration, Tweening.QuintOut);
 		MoveParticles.Play();
 
 		EventManager.Instance.Raise(Events.OnTokenDragged, new OnTokenDraggedScriptableEventArg() { Token = this });
@@ -111,8 +114,8 @@ public class TokenPresenter : MonoBehaviour
 		BackgroundRenderer.sortingLayerID = InitialBackgroundSortingLayer;
 
 		StartNStopParticles.Play();
-		StartCoroutine(FaceRenderer.transform.ZoomToRoutine(ZoomInTarget, TransitionsDuration, Tweening.QuintOut));
-		StartCoroutine(HaloRenderer.AlphaToRoutine(0.0f, TransitionsDuration, Tweening.QuintOut));
+		FaceRenderer.transform.ZoomTo(ZoomInTarget, TransitionsDuration, Tweening.QuintOut);
+		HaloRenderer.ColorTo(HaloRendererInitialColor, TransitionsDuration, Tweening.QuintOut);
 		MoveParticles.Stop();
 
 		EventManager.Instance.Raise(Events.OnTokenDropped, new OnTokenDroppedScriptableEventArg() { Token = this, DropZone = GetTargetDropZone() });
@@ -145,9 +148,9 @@ public class TokenPresenter : MonoBehaviour
 		StartNStopParticles.Play();
 	}
 
-	public void MoveTo(Vector3 targetPosition)
+	public Coroutine MoveTo(Vector3 targetPosition)
 	{
-		StartCoroutine(transform.MoveToRoutine(targetPosition, TransitionsDuration, Tweening.QuintOut));
+		return (transform.MoveTo(targetPosition, TransitionsDuration, Tweening.QuintOut));
 	}
 
 	protected ContainerPresenter GetTargetDropZone()

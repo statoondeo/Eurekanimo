@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1caf4d94a4b99b4488a0569ddc302d6, type: 3}
+  m_Name: Form27
+  m_EditorClassIdentifier: 
+  Name: Fiche 27
+  Instructions:
+  - "La tortue jaune est \xE0 l'oppos\xE9 de l'abeille de la m\xEAme couleur sur
+    une diagonale."
+  - L'animal bleu, qui n'a pas de queue, est au-dessus de son camarade jaune.
+  - "La tortue bleue est \xE0 l'oppos\xE9 de la tortue rouge sur une diagonale."
+  - "Le chat jaune, que regarde l'abeille aux yeux jaunes, est dans la 3\xE8me colonne."
+  - "L'abeille jaune est \xE0 l'oppos\xE9 sur une colonne, de l'animal qui porte
+    sa maison rouge."
+  - "La tortue aux yeux verts, que regarde le chat aux yeux bleus, est dans l'angle
+    sup\xE9rieur gauche de la grille."
+  - L'abeille aux yeux jaunes est en dessous du chat aux yeux bleus.
+  Solution:
+  - {fileID: 11400000, guid: c6ec047ccee824245b7b001aca943bd7, type: 2}
+  - {fileID: 11400000, guid: 01a325106c5165f439403e0f0cd49db2, type: 2}
+  - {fileID: 11400000, guid: ffc723d6fa73891488d25cf93d487917, type: 2}
+  - {fileID: 11400000, guid: 14ad9d3e8562f2c4487cabbd31bded93, type: 2}
+  - {fileID: 11400000, guid: 417b603f7e5b09e488f7d15aaef54662, type: 2}
+  - {fileID: 11400000, guid: 25619f73f4a69014587494b1cb73828c, type: 2}
+  - {fileID: 11400000, guid: 6affcae6d749dbd4f8dc55cecdd1d6e6, type: 2}
+  - {fileID: 11400000, guid: a3db043dbfdb70a46a105317d090cefb, type: 2}
+  - {fileID: 11400000, guid: 6a955f3bdd103d34ba51c7a1b77bd8d3, type: 2}

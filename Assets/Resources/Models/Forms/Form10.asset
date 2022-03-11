@@ -21,8 +21,8 @@ MonoBehaviour:
   - "L'insecte qui regarde en face, est \xE0 gauche dans la 1\xE8re ligne."
   - "L'animal qui mange de la salade, dont les yeux regardent \xE0 sa droite, est
     \xE0 gauche dans la 3\xE8me ligne."
-  - "L'animal qui butine les fleurs et qui regarde  sa gauche, est \xE0 droite dans
-    la 2\xE8me ligne."
+  - "L'animal qui butine les fleurs et qui regarde \xE0 sa gauche, est \xE0 droite
+    dans la 2\xE8me ligne."
   - "L'animal qui chasse les souris et qui regarde en face, est \xE0 droite dans
     la 1\xE8re ligne."
   - "L'animal aux yeux verts, qui regarde en face, est en haut de la 2\xE8me colonne."

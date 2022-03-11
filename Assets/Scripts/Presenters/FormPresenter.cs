@@ -64,6 +64,11 @@ public class FormPresenter : MonoBehaviour
 		EventManager.Instance.Raise(Events.OnGameReady);
 	}
 
+	private void OnDestroy()
+	{
+		StopAllCoroutines();	
+	}
+
 	public void CorrectGrid()
 	{
 		StartCoroutine(CorrectGridRoutine());

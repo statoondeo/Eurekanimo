@@ -1,64 +1,60 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class BackgroundPresenter : MonoBehaviour
 {
-	protected static readonly string PLAYERPREFS_SELECTED_BACKGROUND = "SelectedBackground";
-
 	[SerializeField] protected BackgroundsCatalogModel BackgroundData;
-	public TMP_Dropdown Dropdown;
-	public SpriteRenderer[] Layers;
+	[SerializeField] protected TMP_Dropdown Dropdown;
+	[SerializeField] protected SpriteRenderer[] Layers;
 
-	protected int CurrentBackground;
-	protected int NbBackgrounds;
-	protected int NbLayers;
 	protected float[] TextureUnitSize;
 
-	private void Start()
+	protected void Start()
 	{
-		NbBackgrounds = BackgroundData.ScriptableBackgrounds.Length;
-		NbLayers = BackgroundData.ScriptableBackgrounds[0].Layers.Length;
-
-		CurrentBackground = PlayerPrefs.GetInt(PLAYERPREFS_SELECTED_BACKGROUND, 0);
-
 		if (null != Dropdown)
 		{
-			for (int i = 0; i < NbBackgrounds; i++)
+			for (int i = 0; i < BackgroundData.BackgroundsCount; i++)
 			{
-				Dropdown.options.Add(new TMP_Dropdown.OptionData() { text = BackgroundData.ScriptableBackgrounds[i].Name });
+				Dropdown.options.Add(new TMP_Dropdown.OptionData() { text = BackgroundData.GetName(i) });
 			}
 			Dropdown.RefreshShownValue();
-			Dropdown.value = CurrentBackground;
+			Dropdown.value = BackgroundData.CurrentIndex;
 		}
 
 		// On applique le background trouvé
 		LoadBackgrounds();
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Return))
-		{
-		}
 
 		// On déplace les backgrounds
-		for (int i = 0; i < NbLayers; i++)
+		for (int i = 0; i < BackgroundData.LayersCount; i++)
 		{
-			Layers[i].transform.position += Vector3.left * BackgroundData.ScriptableBackgrounds[CurrentBackground].Speeds[i] * Time.deltaTime;
-			if (Mathf.Abs(Layers[i].transform.position.x) >= TextureUnitSize[i])
+			StartCoroutine(MoveBackgroundRoutine(i));
+		}
+	}
+
+	protected IEnumerator MoveBackgroundRoutine(int layerIndex)
+	{
+		Transform transform = Layers[layerIndex].transform;
+		float speed = BackgroundData.GetCurrentSpeed(layerIndex);
+		float textureUnitSize = TextureUnitSize[layerIndex];
+		while (true)
+		{
+			transform.position += Vector3.left * speed * Time.deltaTime;
+			if (Mathf.Abs(transform.position.x) >= textureUnitSize)
 			{
-				float offsetX = Layers[i].transform.position.x % TextureUnitSize[i];
-				Layers[i].transform.position = new Vector3(offsetX, Layers[i].transform.position.y);
+				float offsetX = transform.position.x % textureUnitSize;
+				transform.position = new Vector3(offsetX, transform.position.y);
 			}
+			yield return (null);
 		}
 	}
 
 	protected void LoadBackgrounds()
 	{
-		TextureUnitSize = new float[NbLayers];
-		for (int i = 0; i < NbLayers; i++)
+		TextureUnitSize = new float[BackgroundData.LayersCount];
+		for (int i = 0; i < BackgroundData.LayersCount; i++)
 		{
-			Layers[i].sprite = BackgroundData.ScriptableBackgrounds[CurrentBackground].Layers[i];
+			Layers[i].sprite = BackgroundData.GetCurrentSprite(i);
 			Sprite sprite = Layers[i].sprite;
 			Texture2D texture = sprite.texture;
 			TextureUnitSize[i] = texture.width / sprite.pixelsPerUnit;
@@ -68,12 +64,11 @@ public class BackgroundPresenter : MonoBehaviour
 	public void OnChangeBackground(int newBackground)
 	{
 		// On applique le background demandé
-		if (newBackground != CurrentBackground)
+		if (newBackground != BackgroundData.CurrentIndex)
 		{
-			CurrentBackground = newBackground;
-			PlayerPrefs.SetInt(PLAYERPREFS_SELECTED_BACKGROUND, CurrentBackground);
+			BackgroundData.CurrentIndex = newBackground;
 			LoadBackgrounds();
-			Dropdown.value = CurrentBackground;
+			Dropdown.value = BackgroundData.CurrentIndex;
 		}
 	}
 }

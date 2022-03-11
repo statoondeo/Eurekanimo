@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0831055bcb0885b4ab01c001f7277b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnExitRequested: {fileID: 11400000, guid: db2d443252fadea488dbd987ed3d5ff0, type: 2}
   OnSceneRequested: {fileID: 11400000, guid: 33d5e1aec76b3dd46b3346f194b5902b, type: 2}
   OnSceneTransitionRequested: {fileID: 11400000, guid: 8b7f09798090ec5418043bc94bc960f7, type: 2}
   OnFormSelected: {fileID: 11400000, guid: f4f9273dcd20e004f851529b0940f6c3, type: 2}

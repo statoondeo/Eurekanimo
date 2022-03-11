@@ -7,6 +7,12 @@ public class FormsCatalogModel : ScriptableObject
 	[HideInInspector, NonSerialized] public FormModel SelectedForm;
 	[HideInInspector, NonSerialized] public CategoryModel SelectedCategory;
 	[SerializeField] protected CategoryModel[] Categories;
+	[SerializeField] protected bool Prototype;
+
+	public bool IsPrototype()
+	{
+		return (Prototype);
+	}
 
 	public int GetCategoriesCount()
 	{
@@ -16,6 +22,11 @@ public class FormsCatalogModel : ScriptableObject
 	public CategoryModel GetCategoryModel(int position)
 	{
 		return (Categories[position]);
+	}
+
+	public int GetCategoryPosition(CategoryModel category)
+	{
+		return (Array.IndexOf(Categories, category));
 	}
 }
 

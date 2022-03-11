@@ -42,7 +42,7 @@ public class ContainerPresenter : MonoBehaviour
 		ZoomOutScale = new Vector3(BaseZoomScale.x * ZoomFactor, BaseZoomScale.y * ZoomFactor, BaseZoomScale.z);
 		PreviouslytHovered = false;
 		yield return (new WaitForSeconds(Random.Range(0.0f, AppearDuration)));
-		yield return (StartCoroutine(transform.MoveToRoutine(InitialPosition, TransitionsDuration, Tweening.QuintOut)));
+		yield return (transform.MoveTo(InitialPosition, TransitionsDuration, Tweening.QuintOut));
 	}
 
 	protected void OnContainerHoveredCallback(ModelEventArg eventArg)
@@ -51,19 +51,19 @@ public class ContainerPresenter : MonoBehaviour
 		{
 			PreviouslytHovered = true;
 			// On s'agrandit
-			StartCoroutine(transform.ZoomToRoutine(ZoomOutScale, TransitionsDuration, Tweening.QuintOut));
+			transform.ZoomTo(ZoomOutScale, TransitionsDuration, Tweening.QuintOut);
 		}
 		else if (PreviouslytHovered)
 		{
 			PreviouslytHovered = false;
 			// Retour à la taille normale
-			StartCoroutine(transform.ZoomToRoutine(BaseZoomScale, TransitionsDuration, Tweening.QuintOut));    
+			transform.ZoomTo(BaseZoomScale, TransitionsDuration, Tweening.QuintOut);    
 		}
 	}
 
 	public void ColorTo(Color targetColor)
 	{
-		StartCoroutine(SpriteRenderer.ColorToRoutine(targetColor, TransitionsDuration, Tweening.QuintOut));
+		SpriteRenderer.ColorTo(targetColor, TransitionsDuration, Tweening.QuintOut);
 	}
 
 	protected void OnTokenDraggedCallback(ModelEventArg eventArg)
@@ -80,7 +80,7 @@ public class ContainerPresenter : MonoBehaviour
 	{
 		if (this == (eventArg as OnDropZoneEmptiedScriptableEventArg).DropZone)
 		{
-			StartCoroutine(transform.ZoomToRoutine(BaseZoomScale, TransitionsDuration, Tweening.ElasticOut));
+			transform.ZoomTo(BaseZoomScale, TransitionsDuration, Tweening.ElasticOut);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class ContainerPresenter : MonoBehaviour
 		if (this == (eventArg as OnDropZoneFilledScriptableEventArg).DropZone)
 		{
 			PreviouslytHovered = false;
-			StartCoroutine(transform.ZoomToRoutine(BaseZoomScale, TransitionsDuration, Tweening.ElasticOut));
+			transform.ZoomTo(BaseZoomScale, TransitionsDuration, Tweening.ElasticOut);
 		}
 	}
 }

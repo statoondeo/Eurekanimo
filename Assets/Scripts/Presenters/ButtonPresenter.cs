@@ -17,6 +17,7 @@ public class ButtonPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	protected Button Button;
 	protected Image ButtonImage;
 	protected Color HaloOriginalColor;
+	protected Color EnabledButtonColor;
 	protected Color HaloHoveredColor;
 
 	protected void Awake()
@@ -29,6 +30,7 @@ public class ButtonPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 		Debug.Assert(null != ActivatingEvents, gameObject.name + "/ActivatingEvents not set!");
 		Debug.Assert(null != DeactivatingEvents, gameObject.name + "/DeactivatingEvents not set!");
 
+		Button.onClick.AddListener(OnPointerClick);
 		for (int i = 0, nbItems = ActivatingEvents.Length; i < nbItems; i++)
 		{
 			EventManager.Instance.CreateEventListener(gameObject, ActivatingEvents[i], OnActivateCallback);
@@ -44,7 +46,8 @@ public class ButtonPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 		Button.interactable = DefaultInteractable;
 		HaloOriginalColor = ButtonHalo.color;
 		HaloHoveredColor = new Color(ButtonHalo.color.r, ButtonHalo.color.g, ButtonHalo.color.b, 1.0f);
-		ButtonImage.color = Button.interactable ? Color.white : DisabledButtonColor;
+		EnabledButtonColor = ButtonImage.color;
+		ButtonImage.color = Button.interactable ? EnabledButtonColor : DisabledButtonColor;
 	}
 
 	protected void OnActivateCallback(ModelEventArg eventArg)
@@ -52,7 +55,7 @@ public class ButtonPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 		if (!Button.interactable)
 		{
 			Button.interactable = true;
-			StartCoroutine(Tweening.ColorToRoutine(ButtonImage, Color.white, TransitionSpeed, Tweening.QuintOut));
+			ButtonImage.ColorTo(EnabledButtonColor, TransitionSpeed, Tweening.QuintOut);
 			MoveElastic();
 		}
 	}
@@ -61,15 +64,15 @@ public class ButtonPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	{
 		Vector2 initialPosition = RectTransform.anchoredPosition;
 		RectTransform.anchoredPosition += new Vector2(100, 0);
-		StartCoroutine(Tweening.MoveToRoutine(RectTransform, initialPosition, TransitionSpeed, Tweening.ElasticOut));
+		RectTransform.MoveTo(initialPosition, TransitionSpeed, Tweening.ElasticOut);
 	}
 
 	protected void OnDeactivateCallback(ModelEventArg eventArg)
 	{
 		if (Button.interactable)
 		{
-			StartCoroutine(Tweening.ColorToRoutine(ButtonHalo, HaloOriginalColor, TransitionSpeed, Tweening.QuintOut));
-			StartCoroutine(Tweening.ColorToRoutine(ButtonImage, DisabledButtonColor, TransitionSpeed, Tweening.QuintOut));
+			ButtonHalo.ColorTo(HaloOriginalColor, TransitionSpeed, Tweening.QuintOut);
+			ButtonImage.ColorTo(DisabledButtonColor, TransitionSpeed, Tweening.QuintOut);
 			MoveElastic();
 			Button.interactable = false;
 		}
@@ -78,16 +81,16 @@ public class ButtonPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		if (!Button.interactable) return;
-		StartCoroutine(Tweening.ColorToRoutine(ButtonHalo, HaloHoveredColor, TransitionSpeed, Tweening.QuintOut));
+		ButtonHalo.ColorTo(HaloHoveredColor, TransitionSpeed, Tweening.QuintOut);
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		if (!Button.interactable) return;
-		StartCoroutine(Tweening.ColorToRoutine(ButtonHalo, HaloOriginalColor, TransitionSpeed, Tweening.QuintOut));
+		ButtonHalo.ColorTo(HaloOriginalColor, TransitionSpeed, Tweening.QuintOut);
 	}
 
-	public void OnPointerClick()
+	protected void OnPointerClick()
 	{
 		if (!Button.interactable) return;
 		SoundManager.Instance.Play(SoundManager.Clips.ClickSound);

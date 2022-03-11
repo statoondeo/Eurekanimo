@@ -28,7 +28,7 @@ public class GameplayUIPresenter : MonoBehaviour
 
 	protected void OnGridCorrectlyFilledCallback(ModelEventArg eventArg)
 	{
-		StartCoroutine(RightPanel.MoveToRoutine(Vector2.zero, TransitionsDuration, Tweening.QuintOut));
+		RightPanel.MoveTo(Vector2.zero, TransitionsDuration, Tweening.QuintOut);
 		SoundManager.Instance.Play(SoundManager.Clips.VictoryTheme);
 		RightPanelParticles.Play();
 		EventManager.Instance.Raise(Events.OnGameNotReady);
@@ -36,7 +36,7 @@ public class GameplayUIPresenter : MonoBehaviour
 
 	protected void OnGridWronglyFilledCallback(ModelEventArg eventArg)
 	{
-		StartCoroutine(WrongPanel.MoveToRoutine(Vector2.zero, TransitionsDuration, Tweening.QuintOut));
+		WrongPanel.MoveTo(Vector2.zero, TransitionsDuration, Tweening.QuintOut);
 		SoundManager.Instance.Play(SoundManager.Clips.DefeatTheme);
 		EventManager.Instance.Raise(Events.OnGameNotReady);
 	}
@@ -44,7 +44,7 @@ public class GameplayUIPresenter : MonoBehaviour
 	public void OnMaskWrongPanel()
 	{
 		SoundManager.Instance.Play(SoundManager.Clips.ClickSound);
-		StartCoroutine(WrongPanel.MoveToRoutine(WrongPanelInitialPosition, TransitionsDuration, Tweening.QuintIn));
+		WrongPanel.MoveTo(WrongPanelInitialPosition, TransitionsDuration, Tweening.QuintIn);
 		EventManager.Instance.Raise(Events.OnGameReady);
 	}
 }
